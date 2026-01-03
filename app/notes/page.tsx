@@ -1,13 +1,14 @@
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { fetchNotes } from '../../lib/api/notes';
+
 import Pagination from '../../components/Pagination/Pagination';
-import SearchBox from '../SearchBox/SearchBox';
+import SearchBox from '../../components/SearchBox/SearchBox';
 import css from './App.module.css';
 import NoteList from '../NoteList/NoteList';
 import { useState } from 'react';
 import Modal from '../Modal/Modal';
 import NoteForm from '../NoteForm/NoteForm';
 import { useDebounce } from 'use-debounce';
+import { fetchNotes } from '@/lib/api';
 // import Loader from '../Loader/Loader';
 
 export default function App() {
