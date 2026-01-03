@@ -1,6 +1,6 @@
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { fetchNotes } from '../../services/noteService';
-import Pagination from '../Pagination/Pagination';
+import { fetchNotes } from '../../lib/api/notes';
+import Pagination from '../../components/Pagination/Pagination';
 import SearchBox from '../SearchBox/SearchBox';
 import css from './App.module.css';
 import NoteList from '../NoteList/NoteList';
