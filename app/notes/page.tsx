@@ -5,7 +5,7 @@ import SearchBox from '../../components/SearchBox/SearchBox';
 import css from './App.module.css';
 import NoteList from '../../components/NoteList/NoteList';
 import { useState } from 'react';
-import Modal from '../Modal/Modal';
+import Modal from '../../components/Modal/Modal';
 import NoteForm from '../NoteForm/NoteForm';
 import { useDebounce } from 'use-debounce';
 import { fetchNotes } from '@/lib/api';
