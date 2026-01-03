@@ -1,12 +1,13 @@
+'use client';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 
 import Pagination from '../../components/Pagination/Pagination';
 import SearchBox from '../../components/SearchBox/SearchBox';
-import css from './App.module.css';
+import css from './page.module.css';
 import NoteList from '../../components/NoteList/NoteList';
 import { useState } from 'react';
 import Modal from '../../components/Modal/Modal';
-import NoteForm from '../NoteForm/NoteForm';
+import NoteForm from '../../components/NoteForm/NoteForm';
 import { useDebounce } from 'use-debounce';
 import { fetchNotes } from '@/lib/api';
 // import Loader from '../Loader/Loader';
@@ -20,7 +21,7 @@ export default function App() {
 
   // ****************************useQuery****************************
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ['notes', page, debounced],
     queryFn: () => fetchNotes(page, debounced),
     placeholderData: keepPreviousData,
@@ -60,7 +61,7 @@ export default function App() {
             Create note +
           </button>
         </header>
-        {isLoading && <Loader />}
+        {/* {isLoading && <Loader />} */}
         {notes.length > 0 && <NoteList notes={notes} />}
         {isModalOpen && (
           <Modal onClose={closeModal}>
