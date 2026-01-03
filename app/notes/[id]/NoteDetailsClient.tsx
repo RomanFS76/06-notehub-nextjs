@@ -1,9 +1,37 @@
-import React from 'react'
+'use client';
+import { useParams } from 'next/navigation';
+import css from './NoteDetails.module.css';
+import { fetchNoteById } from '@/lib/api';
+import { useQuery } from '@tanstack/react-query';
 
 const NoteDetailsClient = () => {
-  return (
-    <div>NoteDetailsClient111</div>
-  )
-}
+  const { id } = useParams() as { id: string | undefined };
 
-export default NoteDetailsClient
+  const {
+    data: note,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['note', id],
+    queryFn: () => (id ? fetchNoteById(id) : Promise.reject('Invalid ID')),
+    refetchOnMount: false,
+  });
+
+  if (isLoading) return <p>Loading, please wait...</p>;
+
+  if (error || !note) return <p>Something went wrong.</p>;
+
+  return (
+    <div className={css.container}>
+      <div className={css.item}>
+        <div className={css.header}>
+          <h2>{note.title}</h2>
+        </div>
+        <p className={css.content}>{note.content}</p>
+        <p className={css.date}>{note.createdAt}</p>
+      </div>
+    </div>
+  );
+};
+
+export default NoteDetailsClient;
