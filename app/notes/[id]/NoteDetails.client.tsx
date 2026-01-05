@@ -1,4 +1,5 @@
 'use client';
+
 import { useParams } from 'next/navigation';
 import css from './NoteDetails.module.css';
 import { fetchNoteById } from '@/lib/api';
