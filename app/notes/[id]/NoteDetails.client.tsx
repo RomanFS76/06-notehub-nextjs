@@ -13,13 +13,25 @@ const NoteDetailsClient = () => {
     error,
   } = useQuery({
     queryKey: ['note', id],
-    queryFn: () => (id ? fetchNoteById(id) : Promise.reject('Invalid ID')),
+    queryFn: () => fetchNoteById(id as string),
     refetchOnMount: false,
   });
 
   if (isLoading) return <p>Loading, please wait...</p>;
 
   if (error || !note) return <p>Something went wrong.</p>;
+
+  const formattedDate = note.createdAt
+  ? new Date(note.createdAt).toLocaleString('ru-RU', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+    })
+  : '';
 
   return (
     <div className={css.container}>
@@ -28,7 +40,7 @@ const NoteDetailsClient = () => {
           <h2>{note.title}</h2>
         </div>
         <p className={css.content}>{note.content}</p>
-        <p className={css.date}>{note.createdAt}</p>
+        <p className={css.date}>{formattedDate}</p>
       </div>
     </div>
   );
